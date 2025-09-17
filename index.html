@@ -1,66 +1,114 @@
-# Learning Plan: Coding for Games & HTML
+from fpdf import FPDF
 
-## 1. Foundations: HTML, CSS, and JavaScript
-- **HTML**: Learn the structure of web pages (tags, elements, attributes)
-- **CSS**: Style your pages (colors, layouts, fonts, animations)
-- **JavaScript**: Make your pages interactive (events, variables, loops, functions)
+pdf = FPDF()
+pdf.add_font('NotoSans', '', '/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf', uni=True)
+pdf.add_font('NotoSans', 'B', '/usr/share/fonts/truetype/noto/NotoSans-Bold.ttf', uni=True)
+pdf.set_auto_page_break(auto=True, margin=15)
+pdf.add_page()
+pdf.set_font('NotoSans', 'B', 16)
+pdf.cell(0, 10, 'HTML & Game Development Study Guide & Quiz', ln=True, align='C')
+pdf.ln(10)
 
-**Resources:**
-- [MDN Web Docs - HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
-- [MDN Web Docs - CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
-- [MDN Web Docs - JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+pdf.set_font('NotoSans', 'B', 14)
+pdf.cell(0, 10, 'Study Guide', ln=True)
+pdf.ln(5)
 
-## 2. Practice Mini Projects
-- Build a personal website or portfolio
-- Make a simple interactive button or animation
-- Try a basic quiz or calculator
+sections = {
+    "HTML Structure": [
+        "<!DOCTYPE html>, <html>, <head>, <body>",
+        "Semantic tags: <header>, <footer>, <article>, <section>",
+        "Forms and inputs"
+    ],
+    "CSS Styling": [
+        "Selectors: class, id, element",
+        "Box model: margin, border, padding, content",
+        "Flexbox and grid layout"
+    ],
+    "JavaScript Basics": [
+        "Variables, data types, and operators",
+        "Functions and events",
+        "DOM manipulation"
+    ],
+    "Canvas Usage": [
+        "<canvas> element and context",
+        "Drawing shapes and images",
+        "Animation basics"
+    ],
+    "Game Loops": [
+        "RequestAnimationFrame",
+        "Updating game state",
+        "Rendering frames"
+    ],
+    "Collision Detection": [
+        "Bounding box method",
+        "Circle collision",
+        "Pixel-perfect detection (advanced)"
+    ],
+    "Scoring": [
+        "Tracking points",
+        "Displaying score",
+        "Saving high scores"
+    ],
+    "Project Sharing via GitHub": [
+        "Creating a repository",
+        "Committing and pushing code",
+        "Using GitHub Pages to host"
+    ]
+}
 
-## 3. Game Development Basics (with JavaScript)
-- Learn about the `<canvas>` element for drawing
-- Practice moving shapes with keyboard input
-- Make a simple game (e.g. Pong, Snake, or a clicker game)
+pdf.set_font('NotoSans', '', 12)
+for title, bullets in sections.items():
+    pdf.set_font('NotoSans', 'B', 12)
+    pdf.cell(0, 10, title, ln=True)
+    pdf.set_font('NotoSans', '', 12)
+    for item in bullets:
+        pdf.cell(5)
+        pdf.cell(0, 8, f"☐ {item}", ln=True)
+    pdf.ln(3)
 
-**Resources:**
-- [MDN Canvas Tutorial](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial)
-- [JavaScript Game Tutorials by freeCodeCamp](https://www.youtube.com/watch?v=lhNdUVh3qCc)
+pdf.add_page()
+pdf.set_font('NotoSans', 'B', 14)
+pdf.cell(0, 10, 'Quiz: Multiple Choice Questions', ln=True)
+pdf.ln(5)
 
-## 4. Level Up: Game Features
-- Implement game loops and collision detection
-- Add scoring, levels, and sound
-- Try using libraries like [p5.js](https://p5js.org/) or [Phaser](https://phaser.io/) for more complex games
+quiz = [
+    {
+        "question": "Which HTML tag is used to define a section of content?",
+        "options": ["<div>", "<section>", "<span>", "<article>"],
+        "answer": "<section>",
+        "explanation": "<section> is a semantic tag used to define sections of content."
+    },
+    {
+        "question": "Which CSS property controls the space inside an element's border?",
+        "options": ["margin", "padding", "border", "content"],
+        "answer": "padding",
+        "explanation": "Padding is the space between the content and the border."
+    },
+    {
+        "question": "What method is commonly used to create a game loop in JavaScript?",
+        "options": ["setInterval", "setTimeout", "requestAnimationFrame", "loop()"],
+        "answer": "requestAnimationFrame",
+        "explanation": "requestAnimationFrame is optimized for animations and game loops."
+    },
+    {
+        "question": "Which GitHub feature allows you to host a website?",
+        "options": ["GitHub Actions", "GitHub Pages", "GitHub Repos", "GitHub Commits"],
+        "answer": "GitHub Pages",
+        "explanation": "GitHub Pages lets you host static websites directly from a repository."
+    }
+]
 
-## 5. Share and Get Feedback
-- Learn Git & GitHub basics
-- Upload your projects to GitHub (share your code, showcase your progress)
-- Join communities (like r/gamedev, Stack Overflow, or Discord servers for game dev)
+pdf.set_font('NotoSans', '', 12)
+for i, q in enumerate(quiz, 1):
+    pdf.set_font('NotoSans', 'B', 12)
+    pdf.multi_cell(0, 8, f"{i}. {q['question']}")
+    pdf.set_font('NotoSans', '', 12)
+    for opt in q['options']:
+        pdf.cell(5)
+        pdf.cell(0, 8, f"☐ {opt}", ln=True)
+    pdf.set_font('NotoSans', 'I', 11)
+    pdf.multi_cell(0, 8, f"Explanation: {q['explanation']}")
+    pdf.ln(5)
 
-## 6. Keep Building!
-- Make clones of classic games—Tic-Tac-Toe, Breakout, Flappy Bird
-- Experiment with graphics and sound
-- Collaborate with friends or online communities
-
----
-
-### **Sample Weekly Plan**
-
-| Week | Focus                                  |
-|------|----------------------------------------|
-| 1    | HTML & CSS basics, build simple pages  |
-| 2    | JavaScript basics, add interactions    |
-| 3    | Canvas API, draw/move shapes           |
-| 4    | Make your first mini-game              |
-| 5-6  | Add more features, try a game library  |
-| 7+   | Build bigger games, join game jams     |
-
----
-
-### **Tips for Success**
-- Practice every day, even for a short time.
-- Start small, then add features as you learn.
-- Break games into smaller tasks (e.g., movement, collision, scoring).
-- Don’t be afraid to ask for help or look things up.
-- Share your games and be proud of your progress!
-
----
-
-**Want a custom project idea or links to beginner-friendly tutorials? Let me know!**
+pdf.output("/mnt/data/HTML_Game_Development_Study_Guide_Quiz.pdf")
+print("PDF study guide and quiz generated successfully.")
