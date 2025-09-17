@@ -9,7 +9,9 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 20px;
-      transition: background 0.3s, color 0.3s;
+      background-color: #ffffff;
+      color: #000000;
+      transition: background-color 0.3s, color 0.3s;
     }
 
     .dark-mode {
@@ -21,63 +23,59 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
     }
 
-    input[type="text"] {
+    h1 {
+      margin: 0;
+    }
+
+    .toggle-button {
+      padding: 10px;
+      background-color: #eee;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    select, input, button {
+      margin-top: 15px;
+      padding: 10px;
+      font-size: 16px;
       width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      font-size: 16px;
-    }
-
-    select, button {
-      padding: 10px;
-      margin-top: 10px;
-      font-size: 16px;
+      max-width: 400px;
     }
 
     #response {
       margin-top: 20px;
       padding: 10px;
       border: 1px solid #ccc;
+      max-width: 600px;
     }
 
-    #darkToggle {
-      display: none;
-    }
-
-    label[for="darkToggle"] {
-      cursor: pointer;
-      padding: 10px;
-      background: #eee;
-      border-radius: 5px;
-    }
-
-    #darkToggle:checked ~ body {
-      background-color: #121212;
-      color: #f0f0f0;
+    footer {
+      margin-top: 40px;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
   <header>
     <h1>🎓 Schoolwork Assistant</h1>
-    <label for="darkToggle">🌙 Toggle Dark Mode</label>
-    <input type="checkbox" id="darkToggle" onclick="document.body.classList.toggle('dark-mode')" />
+    <button class="toggle-button" onclick="document.body.classList.toggle('dark-mode')">🌙 Toggle Dark Mode</button>
   </header>
 
   <section>
-    <label for="subject">Choose Subject:</label>
+    <label for="subject">Subject:</label><br />
     <select id="subject">
-      <option value="general">General</option>
+      <option value="english" selected>English</option>
       <option value="math">Math</option>
       <option value="science">Science</option>
       <option value="history">History</option>
-      <option value="english">English</option>
       <option value="coding">Coding</option>
-    </select>
+    </select><br />
 
-    <input type="text" placeholder="Ask your question..." />
+    <input type="text" placeholder="Ask your question..." /><br />
     <button>Ask</button>
   </section>
 
